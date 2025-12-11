@@ -10,7 +10,7 @@ local backgroundColor = colors.black
 local function clearMonitor()
     monitor.clear()
     monitor.setTextColor(textColor)
-m   onitor.setBackgroundColor(backgroundColor)
+    monitor.setBackgroundColor(backgroundColor)
     monitor.setCursorPos(1, 1)
 end
 local function drawCenteredText(y, text)
