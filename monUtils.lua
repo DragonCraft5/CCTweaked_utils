@@ -1,7 +1,18 @@
 local monitor = peripheral.find("monitor")
 local monXSize, monYSize = monitor.getSize()
 
+local textColor = colors.white
+local backgroundColor = colors.black
+
+
+
 -- monitor utils
+local function clearMonitor()
+    monitor.clear()
+    monitor.setTextColor(textColor)
+m   onitor.setBackgroundColor(backgroundColor)
+    monitor.setCursorPos(1, 1)
+end
 local function drawCenteredText(y, text)
     local textLength = string.len(text)
     local x = math.floor((monXSize - textLength) / 2) + 1
