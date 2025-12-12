@@ -12,9 +12,9 @@ local color3 = colors.red
 
 -- monitor utils
 local function clearMonitor()
-    monitor.clear()
     monitor.setTextColor(textColor)
     monitor.setBackgroundColor(backgroundColor)
+    monitor.clear()
     monitor.setCursorPos(1, 1)
 end
 local function drawCenteredText(y, text)
@@ -46,6 +46,9 @@ local function calcPercentage(num1, num2)
     elseif percentage >= 0.5 and percentage < 0.9 then
         monitor.setTextColor(color2)
     else
+        monitor.setTextColor(color3)
+    end
+end
         monitor.setTextColor(color3)
     end
 end
