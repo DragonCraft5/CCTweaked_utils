@@ -3,7 +3,7 @@ local monitor = peripheral.find("monitor")
 
 local monXSize, monYSize = monitor.getSize()
 
-local textColor = colors.white
+local textColor = colors.purple
 local backgroundColor = colors.black
 
 local color1 = colors.green
@@ -13,9 +13,9 @@ local color3 = colors.red
 
 -- monitor utils
 local function clearMonitor()
-    monitor.clear()
     monitor.setTextColor(textColor)
     monitor.setBackgroundColor(backgroundColor)
+    monitor.clear()
     monitor.setCursorPos(1, 1)
 end
 local function drawCenteredText(y, text)
@@ -58,12 +58,18 @@ end
 while true do
     clearMonitor()
     drawCenteredText(1, "ME System Status")
-    drawLeftText(3, "Irem Storage:")
+    drawLeftText(3, "Item Storage:")
     drawLeftText(4, "Available:")
+        drawLeftText(6, "Fluid Storage:")
+    drawLeftText(7, "Available:")
 
     calcPercentage(bridge.getUsedItemStorage(), bridge.getTotalItemStorage())
     drawRightText(3, tostring(bridge.getUsedItemStorage()) .. "/" .. tostring(bridge.getTotalItemStorage()))
     drawRightText(4, tostring(bridge.getAvailableItemStorage()))
+
+    calcPercentage(bridge.getUsedFluidStorage(), bridge.getTotalFluidStorage())
+    drawRightText(6, tostring(bridge.getUsedFluidStorage()) .. "/" .. tostring(bridge.getTotalFluidStorage()))
+    drawRightText(7, tostring(bridge.getAvailableFluidStorage()))
     os.sleep(5)
 end
 
