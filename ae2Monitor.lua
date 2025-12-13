@@ -56,6 +56,15 @@ end
 
 -- main loop
 while true do
+    local usedItem = bridge.getUsedItemStorage()
+    local totalItem = bridge.getTotalItemStorage()
+    local availableItem = bridge.getAvailableItemStorage()
+
+    local usedFluid = bridge.getUsedFluidStorage()
+    local totalFluid = bridge.getTotalFluidStorage()
+    local availableFluid = bridge.getAvailableFluidStorage()
+
+
     clearMonitor()
     drawCenteredText(1, "ME System Status")
     drawLeftText(3, "Item Storage:")
@@ -63,13 +72,12 @@ while true do
         drawLeftText(6, "Fluid Storage:")
     drawLeftText(7, "Available:")
 
-    calcPercentage(bridge.getUsedItemStorage(), bridge.getTotalItemStorage())
-    drawRightText(3, tostring(bridge.getUsedItemStorage()) .. "/" .. tostring(bridge.getTotalItemStorage()))
-    drawRightText(4, tostring(bridge.getAvailableItemStorage()))
+    calcPercentage(usedItem, totalItem)
+    drawRightText(3, tostring(usedItem) .. "/" .. tostring(totalItem))
+    drawRightText(4, tostring(availableItem))
 
-    calcPercentage(bridge.getUsedFluidStorage(), bridge.getTotalFluidStorage())
-    drawRightText(6, tostring(bridge.getUsedFluidStorage()) .. "/" .. tostring(bridge.getTotalFluidStorage()))
-    drawRightText(7, tostring(bridge.getAvailableFluidStorage()))
-    os.sleep(5)
+    calcPercentage(usedFluid, totalFluid)
+    drawRightText(6, tostring(usedFluid) .. "/" .. tostring(totalFluid))
+    drawRightText(7, tostring(availableFluid))
+    os.sleep(3)
 end
-
