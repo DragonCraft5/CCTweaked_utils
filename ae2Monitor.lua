@@ -10,6 +10,8 @@ local color1 = colors.green
 local color2 = colors.yellow
 local color3 = colors.red
 
+local sleepTime = 2
+
 
 -- monitor utils
 local function clearMonitor()
@@ -53,7 +55,6 @@ end
 
 
 
-
 -- main loop
 while true do
     local usedItem = bridge.getUsedItemStorage()
@@ -79,5 +80,6 @@ while true do
     calcPercentage(usedFluid, totalFluid)
     drawRightText(6, tostring(usedFluid) .. "/" .. tostring(totalFluid))
     drawRightText(7, tostring(availableFluid))
-    os.sleep(3)
+    os.sleep(sleepTime)
 end
+
