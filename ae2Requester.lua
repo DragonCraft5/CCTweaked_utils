@@ -33,7 +33,7 @@ local function craft(item, amount, cpuName)
     elseif bridge.isItemCrafting({name = item}) then
         print("already getting crafted")
         return false
-    elseif bridge.isItemCraftable({name = item}) then
+    elseif not bridge.isItemCraftable({name = item}) then
         print("not craftable")
         return false
     else
