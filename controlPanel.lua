@@ -9,10 +9,19 @@ local activeButtonTextColor = colors.purple
 
 
 local buttons = {
-    {pos = 2, textLength, text = "test button", reciever = 1, message = "press", toggle = false},
+    {pos = 2, textLength, text = "test button", reciever = 1, message = "press", toggle = false, active = false},
     {pos = 4, textLength, text = "toggle button", reciever = 2, message = "toggle", toggle = true, active = false},
     {pos = 6, textLength, text = "active button", reciever = 6, message = "toggle", toggle = true, active = true}
 }
+
+local function buttonFuntions(pressedButton)
+    if pressedButton == 1 then
+        
+    end
+end
+
+
+
 
 
 
@@ -35,11 +44,23 @@ local function clear()
     term.clear()
 end
 
-local function checkClickPos(x, y)
+local function checkClickPos(posArray)
     for key, value in pairs(buttons) do
-        if y == value.pos and x >= 2 and x <= value.textLength + 1 then
-            value.active = not value.active
+        if posArray[2] == value.pos and posArray[1] >= 2 and posArray[1] <= value.textLength + 1 then
+            if value.toggle then
+                value.active = not value.active
+            else
+                drawButton(value.pos, value.text, true)
+                os.sleep(0.2)
+            end
         end
+    end
+end
+
+local function waitForClick()
+    event, button, x, y = os.pullEvent("mouse_click")
+    if button == 1 then
+        return {x, y}
     end
 end
 
@@ -50,7 +71,6 @@ for key, value in pairs(buttons) do
     value.textLength = string.len(value.text)
 end
 
--- main
 while true do
     clear()
 
@@ -58,5 +78,8 @@ while true do
         drawButton(value.pos, value.text, value.active)
     end
 
-    os.sleep(1)
+    checkClickPos(waitForClick())
 end
+
+
+
