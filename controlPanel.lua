@@ -9,9 +9,9 @@ local activeButtonTextColor = colors.purple
 
 
 local buttons = {
-    {pos = 2, textLength, text = "test button", reciever = 1, message = "press", toggle = false, active = false},
-    {pos = 4, textLength, text = "toggle button", reciever = 2, message = "toggle", toggle = true, active = false},
-    {pos = 6, textLength, text = "active button", reciever = 6, message = "toggle", toggle = true, active = true}
+    {pos = 2, textLength, text = "test button", recipient = 1, message = "press", toggle = false, active = false},
+    {pos = 4, textLength, text = "toggle button", recipient = 1, message = "toggle", toggle = true, active = false},
+    {pos = 6, textLength, text = "active button", recipient = 1, message = "toggle", toggle = true, active = true}
 }
 
 
@@ -19,18 +19,15 @@ local buttons = {
 
 -------------------- Main running funtions --------------------
 
-local modemAPI = require("novsModemApi")
 local modem = peripheral.find("modem")
+local modemSide = "right"
+local protocol = "HUSZ65WIFGQPR"
 
-modemAPI.open(modem)
-
-
-
+rednet.open(modemSide)
 
 local function buttonFuntions(pressedButton)
-    if pressedButton == 1 then
-        
-    end
+    local message = buttons[pressedButton].message .. " " .. tostring(buttons[pressedButton].active)
+    rednet.send(buttons[pressedButton].recipient, message, protocol)
 end
 
 
@@ -64,11 +61,13 @@ end
 
 local function checkClickPos(posArray)
     for key, value in pairs(buttons) do
-        if posArray[2] == value.pos and posArray[1] >= 2 and posArray[1] <= value.textLength + 1 then
+        if posArray[2] == value.pos and (posArray[1] >= 2 and posArray[1] <= value.textLength + 1) then
             if value.toggle then
                 value.active = not value.active
+                buttonFuntions(key)
             else
                 drawButton(value.pos, value.text, true)
+                buttonFuntions(key)
                 os.sleep(0.2)
             end
         end
