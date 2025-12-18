@@ -1,0 +1,9 @@
+local channel = 52534
+
+local function open(modem)
+    if modem.isOpen(channel) then
+        modem.open(channel)
+    else
+        print("channel " .. channel .. " is already open")
+    end
+end
