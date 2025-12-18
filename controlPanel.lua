@@ -14,6 +14,19 @@ local buttons = {
     {pos = 6, textLength, text = "active button", reciever = 6, message = "toggle", toggle = true, active = true}
 }
 
+
+
+
+-------------------- Main running funtions --------------------
+
+local modemAPI = require("novsModemApi")
+local modem = peripheral.find("modem")
+
+modemAPI.open(modem)
+
+
+
+
 local function buttonFuntions(pressedButton)
     if pressedButton == 1 then
         
@@ -21,6 +34,11 @@ local function buttonFuntions(pressedButton)
 end
 
 
+
+
+
+
+---------------------------------------------------------------
 
 
 
